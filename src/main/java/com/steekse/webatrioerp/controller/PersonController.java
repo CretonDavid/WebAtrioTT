@@ -3,6 +3,7 @@ package com.steekse.webatrioerp.controller;
 import com.steekse.webatrioerp.dto.PersonDto;
 import com.steekse.webatrioerp.dto.JobDto;
 import com.steekse.webatrioerp.service.IPersonService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class PersonController {
     private IPersonService personService;
 
     @PostMapping("/create")
-    public ResponseEntity<String> createProduct(@RequestBody PersonDto personDto) {
+    public ResponseEntity<String> createProduct(@Valid @RequestBody PersonDto personDto) {
         personService.createPerson(personDto);
         return ResponseEntity.ok("Person successfully created");
     }

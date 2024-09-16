@@ -36,8 +36,8 @@ public class PersonServiceImpl implements IPersonService {
     public void createPerson(PersonDto personDto) {
         Person person = PersonMapper.INSTANCE.toEntity(personDto);
         int age = LocalDate.now().getYear() - person.getBirthDate().getYear();
-        if (age >= 150) {
-            throw new AgeLimitExceededException("Person cannot be more than 150 years old");
+        if (age >= 150 || age < 18) {
+            throw new AgeLimitExceededException("Person cannot be more than 150 years old and less than 18");
         }
         personRepository.save(person);
         logger.info("New person has been created");
